@@ -4,8 +4,8 @@
     
         "request_limit" : 15,
         "sleep_time": 5,
-        "email" : "ichaudr1@umbc.edu",
-        "api_key" : "cd2f5bf7a67d086647ec33da2c985e018d08"
+        "email" : "EMAIL",
+        "api_key" : "KEY"
         
     }],
 
