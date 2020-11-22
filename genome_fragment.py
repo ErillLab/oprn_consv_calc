@@ -177,16 +177,7 @@ class GenomeFragment:
 
         #Fetch the feature for each hit
         for hit in self.hits:
-            hit.fetch_feature(self.full_record, margin_limit=margin_limit, max_attempts=max_attempts, mult_factor=mult_factor)
-        '''
-        #Remove any duplicate features so that no more than
-        purged_hits = []
-        for hit in self.hits:
-            if not hit in purged_hits:
-                purged_hits.append(hit)
-        
-        self.hits = purged_hits'''
-    
+            hit.fetch_feature(self.full_record, margin_limit=margin_limit, max_attempts=max_attempts, mult_factor=mult_factor)    
 
     def purge_hits(self):
         '''
