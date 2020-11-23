@@ -579,7 +579,7 @@ def write_all_out(filename='output.csv'):
     ofile_stream = csv.writer(open(filename, mode='w'))
 
     #Setup and write the header row to the file 
-    header_row = ['Species Name','Structural Similarity', 'Average BLAST Identity']
+    header_row = ['Species Name','Structural Similarity', 'Average Percent Amino Acid Identity']
 
     for record in input_records:
         header_row.append(str(record))
