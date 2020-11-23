@@ -9,6 +9,9 @@ The operon_conserve_detect.py script takes a reference operon as a list of genom
 
 ### Object Definitions
 
+** GenomeFragment ** 
+
+
 ### Sample Input
 
 ### Output
