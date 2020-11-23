@@ -37,7 +37,7 @@ The operon_conserve_detect.py script takes a reference operon as a list of genom
 		* fetch_feature(self, record, margin_limit, max_attempts, mult_factor): Determines the feature that corresponds to this hit. It works by finding a feature in the full genome accession record that contains the alignment start and end positions in bounds with a set margin. 
 		* \_\_str\_\_() and \_\_eq\_\_() are overriden string and equivalence functions
 
-* **Operon**
+* **Operon (operon.py)**
 	* Holds a set of GenomeFeature (and/or by extension AnnotatedHit) objects that have been assigned to the same operon.
 	* Member variables:
 		* features[]: A list of GenomeFeature (and/or by extension AnnotatedHit) objects
@@ -48,7 +48,7 @@ The operon_conserve_detect.py script takes a reference operon as a list of genom
 		* add_feature(self, feature): Checks if the feature belongs to the GenomeFragment this operon belongs to, and adds it to the list of features. It then sorts the current list of features from 5' to 3' 
 		* \_\_str\_\_() is a overridden string function
 
-* **GenomeFragment**
+* **GenomeFragment (genome_fragment.py)**
 	* Represents a single nucleotide accession (i.e. plasmid, chromosome, contig, ...etc.)
 	* Member variables:
 		* hits[]: The AnnotatedHits associated with this GenomeFragment
@@ -68,7 +68,7 @@ The operon_conserve_detect.py script takes a reference operon as a list of genom
 		* assemble_operons(self, feature_limit, intergenic_limit): Takes the list of hits and organizes them into putative operons (Operon objects)
 
 
-* **Species**
+* **Species (species.py)**
 
 ### Sample Input
 
