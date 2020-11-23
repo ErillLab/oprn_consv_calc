@@ -22,7 +22,7 @@ The operon_conserve_detect.py script takes a reference operon as a list of genom
 		* Request limit for the Entrez searches
 		* Sleep time between consecutive Entrez searches
 	* Main Functions:
-		* get_intergenic_distance(self, other): Determines the distance to another GenomeFeature
+		* '''get_intergenic_distance(self, other)''': Determines the distance to another GenomeFeature
 		* \_\_str\_\_() and \_\_eq\_\_() are overridden string and equivalence functions
 
 
@@ -34,8 +34,8 @@ The operon_conserve_detect.py script takes a reference operon as a list of genom
 		* The percent amino acid identity
 		* The alignment sequence
 	* Main Functions:
-		* fetch_feature(self, record, margin_limit, max_attempts, mult_factor): Determines the feature that corresponds to this hit. It works by finding a feature in the full genome accession record that contains the alignment start and end positions in bounds with a set margin. 
-		* \_\_str\_\_() and \_\_eq\_\_() are overriden string and equivalence functions
+		* '''fetch_feature(self, record, margin_limit, max_attempts, mult_factor)''': Determines the feature that corresponds to this hit. It works by finding a feature in the full genome accession record that contains the alignment start and end positions in bounds with a set margin. 
+		* '''\_\_str\_\_()''' and '''\_\_eq\_\_()''' are overriden string and equivalence functions
 
 * **Operon (operon.py)**
 	* Holds a set of GenomeFeature (and/or by extension AnnotatedHit) objects that have been assigned to the same operon.
