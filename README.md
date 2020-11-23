@@ -10,6 +10,18 @@ The operon_conserve_detect.py script takes a reference operon as a list of genom
 ### Object Definitions
 
 * **GenomeFeature**
+	* Holds information about a feature including:
+		* Genome accession 
+		* Coding start and end
+		* Strand (+ or -)
+		* Protein accession
+		* Locus tag
+		* Amino acid sequence
+	* Also requires the following parameters to be passed in when initializing the object:
+		* Request limit for the Entrez searches
+		* Sleep time between consecutive Entrez searches
+	* Functions:
+	
 
 * **AnnotatedHit**
 
