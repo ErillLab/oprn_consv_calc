@@ -21,7 +21,9 @@ The operon_conserve_detect.py script takes a reference operon as a list of genom
 		* Request limit for the Entrez searches
 		* Sleep time between consecutive Entrez searches
 	* Functions:
-	
+		* get_intergenic_distance(self, other): Determines the distance to another GenomeFeature
+		* __str__() and __eq__() are overriden string and equivalence functions
+
 
 * **AnnotatedHit**
 
