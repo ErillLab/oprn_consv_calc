@@ -74,11 +74,11 @@ class GenomeFeature:
 class AnnotatedHit(GenomeFeature):
     '''
     Holds the annotated information for a BLAST hit. It an extended form of a feature that also holds infromation
-    about the alignment start/stop positions and the querey accesion. 
+    about the alignment start/stop positions and the query accesion. 
     
     '''
-    def __init__(self,querey_accession, hit_accession, genome_fragment_name, align_start, align_end, strand, alignment_seq, percent_identity, req_limit, sleep_time):
-        self.querey_accession = querey_accession
+    def __init__(self,query_accession, hit_accession, genome_fragment_name, align_start, align_end, strand, alignment_seq, percent_identity, req_limit, sleep_time):
+        self.query_accession = query_accession
         self.align_start = align_start
         self.align_end = align_end
         self.feature_found = False

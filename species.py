@@ -21,61 +21,61 @@ class Species:
         self.genome_fragments = genome_fragments
         self.genome_fragments_accessions = []
         self.sim_score = 0
-        self.querey_percent_ids = {}
+        self.query_percent_ids = {}
         self.taxid = '-1'
     
     ###This function is not used anywhere anymore
-    def contains_querey_feature(self, querey_accession):
+    def contains_query_feature(self, query_accession):
         '''
-        Searches all the GenomeFragment objects for a feature with that resulted from an original querey from the reference operon
+        Searches all the GenomeFragment objects for a feature with that resulted from an original query from the reference operon
 
         Parameters
         ----------
-        querey_accession: string
-            The accession of the querey of interest
+        query_accession: string
+            The accession of the query of interest
         
         Returns
         -------
         found_feature: GenomeFeature object
-            The GenomeFeature object that resutled from the querey of interest
+            The GenomeFeature object that resutled from the query of interest
         '''
 
         found_feature = None
 
         for fragment in self.genome_fragments:
             for hit in fragment.hits:
-                if hit.querey_accession == querey_accession:
+                if hit.query_accession == query_accession:
                     found_feature = hit
         
         return found_feature
     
 
-    def get_querey_percent_ids(self, querey_accessions):
+    def get_query_percent_ids(self, query_accessions):
         '''
-        Determines the hit with the max percent identity (per BLAST search) for a given list querey accessions and stores it in a dictionary.
+        Determines the hit with the max percent identity (per BLAST search) for a given list query accessions and stores it in a dictionary.
 
         Parameters
         ----------
-        querey: list[string]
-            The accessions for the querey from the reference operon.
+        query: list[string]
+            The accessions for the query from the reference operon.
         
         Returns
         -------
         None - a dictionary is set in the object with {key:value} = {reference_accession:percent_id}
         '''
         
-        for q_acc in querey_accessions:
+        for q_acc in query_accessions:
             #Stores the max percenty identity 
             max_percent_id = 0
 
-            #Iterate through all genome fragments and all features to find any corresponding with the target querey and assess its percent identity. 
+            #Iterate through all genome fragments and all features to find any corresponding with the target query and assess its percent identity. 
             for frag in self.genome_fragments:
                 for hit in frag.hits:
-                    if hit.querey_accession == q_acc:
+                    if hit.query_accession == q_acc:
                         if hit.percent_identity > max_percent_id:
                             max_percent_id = hit.percent_identity
             
-            self.querey_percent_ids[q_acc] = max_percent_id
+            self.query_percent_ids[q_acc] = max_percent_id
 
 
     
@@ -132,7 +132,7 @@ class Species:
         Parameters
         ----------
         reference_operon: list[string]
-            This list contains the accessions for the querey operon IN THE REFERENCE ORDER
+            This list contains the accessions for the query operon IN THE REFERENCE ORDER
         
         Returns
         -------
@@ -147,12 +147,12 @@ class Species:
             ref_pairs.append((reference_operon[i], reference_operon[i+1]))
 
 
-        #Holds how many times each reference querey got a hit in the species
-        species_querey_count = {}
+        #Holds how many times each reference query got a hit in the species
+        species_query_count = {}
 
         #Initializes all counts to 0
         for ref_acc in reference_operon:
-            species_querey_count[ref_acc] = 0
+            species_query_count[ref_acc] = 0
 
         #Stores tuples representing the pairs of reference hits in this species
         species_pairs = []
@@ -172,15 +172,15 @@ class Species:
                         #Append the purged features list
                         purged_features.append(feat)
 
-                        #Adjust the count in the species_querey_count
-                        species_querey_count[feat.querey_accession] = species_querey_count[feat.querey_accession] + 1
+                        #Adjust the count in the species_query_count
+                        species_query_count[feat.query_accession] = species_query_count[feat.query_accession] + 1
                 
                 #Determine the pairs from the purged list
                 if len(purged_features) > 0:
                     for i in range(len(purged_features) - 1):
 
                         #The tuple that holds the current pair
-                        pair = (purged_features[i].querey_accession, purged_features[i+1].querey_accession)
+                        pair = (purged_features[i].query_accession, purged_features[i+1].query_accession)
 
                         #Add the pair to the species_pair list
                         species_pairs.append(pair)
@@ -193,7 +193,7 @@ class Species:
         for ref_pair in ref_pairs:
 
             #Determine the max number of times this pair could occur in the species
-            max_possible_occur = min(species_querey_count[ref_pair[0]], species_querey_count[ref_pair[1]])
+            max_possible_occur = min(species_query_count[ref_pair[0]], species_query_count[ref_pair[1]])
 
             #Holds the number occurences in the species
             num_occur = 0
@@ -355,7 +355,7 @@ class Species:
                     if not isinstance(feat, AnnotatedHit):
                         color = color_code['intergenic']
                     else:
-                        color = color_code[feat.querey_accession]
+                        color = color_code[feat.query_accession]
 
                     #Make the SeqFeature object
                     curr_feat = SeqFeature(location=FeatureLocation(start=start, end=end, strand=strand), qualifiers={'gene':[gene_name]})

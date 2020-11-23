@@ -230,7 +230,7 @@ def search_blast(input_records, db='ref_prok_rep_genomes', max_attempts=3, searc
 
                 elif len(tax_incl) > 1:
 
-                    #Goes through each of the taxa limits appends to the overall entrez_querey parameter
+                    #Goes through each of the taxa limits appends to the overall entrez_query parameter
                     for i in range(len(tax_incl) - 1):
                         taxon = taxon + "txid" + str(tax_incl[i]) + "[orgn]" + " AND "
 
@@ -246,7 +246,7 @@ def search_blast(input_records, db='ref_prok_rep_genomes', max_attempts=3, searc
 
                     taxon = taxon + " NOT "
 
-                    #Goes through each of the taxa limits appends to the overall entrez_querey parameter
+                    #Goes through each of the taxa limits appends to the overall entrez_query parameter
                     for i in range(len(tax_excl) - 1):
                         taxon = taxon + "txid" + str(tax_excl[i]) + "[orgn]" + " NOT "
 
@@ -343,7 +343,7 @@ def search_blast(input_records, db='ref_prok_rep_genomes', max_attempts=3, searc
 
                 #Initiates a AnnotatedHit object if set by the parameters. 
                 if annotate:
-                    a_hit = AnnotatedHit(querey_accession=input_record, hit_accession=curr_hit_rec, genome_fragment_name=current_hit_def, align_start=hit.sbjct_start, alignment_seq=hit.sbjct, 
+                    a_hit = AnnotatedHit(query_accession=input_record, hit_accession=curr_hit_rec, genome_fragment_name=current_hit_def, align_start=hit.sbjct_start, alignment_seq=hit.sbjct, 
                         align_end=hit.sbjct_end, strand=hit.frame[1], percent_identity=(hit.identities/hit.align_length), req_limit=REQUEST_LIMIT, sleep_time=SLEEP_TIME)
                         
                 #Checks if hit meets the minimum coverage if provided 
@@ -590,11 +590,11 @@ def write_all_out(filename='output.csv'):
 
     #Write info for all the species in the file
     for sp in species:
-        sp_row = [sp.species_name, (str(sp.sim_score*100) + "%"), (str(100 * sum(sp.querey_percent_ids.values())/len(sp.querey_percent_ids)) + '%')]
+        sp_row = [sp.species_name, (str(sp.sim_score*100) + "%"), (str(100 * sum(sp.query_percent_ids.values())/len(sp.query_percent_ids)) + '%')]
 
-        #Pulls the querey percent IDs
-        for querey in input_records:
-            sp_row.append(str(sp.querey_percent_ids[querey] * 100) + '%')
+        #Pulls the query percent IDs
+        for query in input_records:
+            sp_row.append(str(sp.query_percent_ids[query] * 100) + '%')
         
         #Pulls the taxid
         sp_row.append(sp.taxid)
@@ -836,7 +836,7 @@ def calculate_percent_ids(sp):
 
             #Pull the sequence for the reference gene this hit came from
             for ref_feat in ref_features:
-                if feat.querey_accession == ref_feat.protein_accession:
+                if feat.query_accession == ref_feat.protein_accession:
                     ref_seq = ref_feat.aa_sequence
             
             #Purge the reference sequence and the hit feature sequence of any non traditional amino acids
@@ -990,14 +990,14 @@ def make_reference_blastdb():
 
         os.system(cmd.format(input_file=input_file, output_file=output_file))
 
-def check_reverse_blast(querey_accession, annoted_hit):
+def check_reverse_blast(query_accession, annoted_hit):
     '''
-    Performs a local BLAST search of the hit against the querey to see if the same feature is returned. 
+    Performs a local BLAST search of the hit against the query to see if the same feature is returned. 
 
     Parameters
     ----------
-    querey_accession: string
-        The accession for the querey gene that the hit resulted from.
+    query_accession: string
+        The accession for the query gene that the hit resulted from.
     annotated_hit: AnnotatedHit object
         The hit that is being tested. 
     '''
@@ -1029,8 +1029,8 @@ def check_reverse_blast(querey_accession, annoted_hit):
     #Conduct the BLAST search
     os.system(cmd.format(q_path=temp_in, out_path=temp_out, db_path=db_path))
 
-    #Get the BLAST results from the temp_out file and determine if there was a hit back to the querey
-    hit_returned_querey = False
+    #Get the BLAST results from the temp_out file and determine if there was a hit back to the query
+    hit_returned_query = False
     with open(temp_out) as file:
 
         #Parse the output file from the BLAST search
@@ -1038,11 +1038,11 @@ def check_reverse_blast(querey_accession, annoted_hit):
 
         if len(result_handle[0].alignments) > 0:
             record  = result_handle[0].alignments[0]
-            #tqdm.write(querey_accession + '\t' + reference_genome_accession + '\t' + record.hit_def)
-            if (querey_accession in record.hit_def) and (reference_genome_accession in record.hit_def):
-                hit_returned_querey = True
+            #tqdm.write(query_accession + '\t' + reference_genome_accession + '\t' + record.hit_def)
+            if (query_accession in record.hit_def) and (reference_genome_accession in record.hit_def):
+                hit_returned_query = True
                 
-        return hit_returned_querey
+        return hit_returned_query
 
 def calc_operon_cons():
     '''
@@ -1180,12 +1180,12 @@ def calc_operon_cons():
 
         #Calculate the percent id for each of the querery genes
         tqdm.write("\tCalculating percent IDs for " + str(sp.assembly_accession) + " ...")
-        sp.get_querey_percent_ids(input_records)
+        sp.get_query_percent_ids(input_records)
 
         #Determine if any of the quereies are above the limit
         above_limit = False 
 
-        for val in sp.querey_percent_ids.values():
+        for val in sp.query_percent_ids.values():
             if val >= species_percent_id_limit:
                 above_limit = True
         
@@ -1230,12 +1230,12 @@ def calc_operon_cons():
         #Calculate the percent id for each of the hits in every fragment in every species 
         tqdm.write('Caclulating percent ids for ' + str(sp.assembly_accession) + '...')
         calculate_percent_ids(sp)
-        sp.get_querey_percent_ids(input_records)
+        sp.get_query_percent_ids(input_records)
 
         #Determine if any of the quereies are above the limit
         above_limit = False 
 
-        for val in sp.querey_percent_ids.values():
+        for val in sp.query_percent_ids.values():
             if val >= species_percent_id_limit:
                 above_limit = True
         

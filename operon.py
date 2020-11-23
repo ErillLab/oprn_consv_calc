@@ -42,7 +42,7 @@ class Operon:
 
             for f in self.features:
                 if isinstance(f, AnnotatedHit):
-                    to_return = to_return + "\tOriginal Query: " + f.querey_accession + "\tHit Accession: " + f.protein_accession + "\tLocus Tag: " + f.locus_tag + "\n"
+                    to_return = to_return + "\tOriginal Query: " + f.query_accession + "\tHit Accession: " + f.protein_accession + "\tLocus Tag: " + f.locus_tag + "\n"
                 elif isinstance(f, GenomeFeature):
                     to_return = to_return + "\tIntergenic Feature:  " + f.protein_accession + "\tLocus Tag: " + f.locus_tag + "\n"
         except:

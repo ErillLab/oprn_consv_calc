@@ -317,7 +317,7 @@ class GenomeFragment:
             temp_operon_features = []
             temp_operon_features.append(plus_strand_hits.pop(0))
 
-            #The last feature in the temp operon that was from an original querey, i.e AnnotatedHit
+            #The last feature in the temp operon that was from an original query, i.e AnnotatedHit
             last_a_hit_pos = 0
 
             #Keep track of inserted intergenic features added
@@ -368,7 +368,7 @@ class GenomeFragment:
             temp_operon_features = []
             temp_operon_features.append(minus_strand_hits.pop(0))
 
-            #The last feature in the temp operon that was from an original querey, i.e AnnotatedHit
+            #The last feature in the temp operon that was from an original query, i.e AnnotatedHit
             last_a_hit_pos = 0
 
             #Keep track of inserted intergenic features added

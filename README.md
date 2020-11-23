@@ -9,7 +9,7 @@ The operon_conserve_detect.py script takes a reference operon as a list of genom
 
 ### Object Definitions
 
-* **GenomeFeature**
+* **GenomeFeature (feature.py)**
 	* Holds information about a feature including:
 		* Genome accession 
 		* Coding start and end
@@ -25,7 +25,9 @@ The operon_conserve_detect.py script takes a reference operon as a list of genom
 		* \_\_str\_\_() and \_\_eq\_\_() are overriden string and equivalence functions
 
 
-* **AnnotatedHit**
+* **AnnotatedHit (feature.py)**
+	* A subclass of GenomeFeature. Contains additional information pertaining to the BLAST hit results, including:
+		* 
 
 * **Operon**
 
