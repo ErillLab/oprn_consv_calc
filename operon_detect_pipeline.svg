@@ -1,0 +1,101 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<!DOCTYPE svg PUBLIC "-//W3C//DTD SVG 1.1//EN" "http://www.w3.org/Graphics/SVG/1.1/DTD/svg11.dtd">
+<svg width="100%" height="100%" viewBox="0 0 11567 3040" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" xml:space="preserve" xmlns:serif="http://www.serif.com/" style="fill-rule:evenodd;clip-rule:evenodd;stroke-linecap:round;stroke-linejoin:round;stroke-miterlimit:1.5;">
+    <g transform="matrix(1.33333,0,0,1.33333,-976.849,-6860.8)">
+        <g transform="matrix(0.695612,0,0,0.695612,532.471,2006.49)">
+            <circle cx="950.713" cy="5175.7" r="637.5" style="fill:rgb(226,0,0);fill-opacity:0.57;stroke:black;stroke-width:50.91px;"/>
+        </g>
+        <g transform="matrix(0.695612,0,0,0.695612,1927.15,3363.76)">
+            <circle cx="950.713" cy="5175.7" r="637.5" style="fill:rgb(0,218,84);fill-opacity:0.57;stroke:black;stroke-width:50.91px;"/>
+        </g>
+        <g transform="matrix(1.41829,0,0,1.41829,37.5349,4986.28)">
+            <text x="552.871px" y="341.557px" style="font-family:'Verdana-Bold', 'Verdana', sans-serif;font-weight:700;font-size:50px;">Reference Operon:</text>
+        </g>
+        <g transform="matrix(1.41829,0,0,1.41829,1654.42,6397.52)">
+            <text x="552.871px" y="341.557px" style="font-family:'Verdana-Bold', 'Verdana', sans-serif;font-weight:700;font-size:50px;">Output:</text>
+        </g>
+        <g transform="matrix(1.57678,0,0,1.57678,119.879,5056.96)">
+            <text x="552.871px" y="341.557px" style="font-family:'Verdana', sans-serif;font-size:50px;">[Gene_1,</text>
+            <text x="552.871px" y="391.557px" style="font-family:'Verdana', sans-serif;font-size:50px;">Gene_2,</text>
+            <text x="552.871px" y="441.557px" style="font-family:'Verdana', sans-serif;font-size:50px;">Gene_3,</text>
+            <text x="552.871px" y="491.557px" style="font-family:'Verdana', sans-serif;font-size:50px;">Gene_4 ...]</text>
+        </g>
+        <g transform="matrix(1.57678,0,0,1.57678,1342.71,6416.02)">
+            <text x="552.871px" y="341.557px" style="font-family:'Verdana', sans-serif;font-size:50px;">- CSV</text>
+            <text x="552.871px" y="391.557px" style="font-family:'Verdana', sans-serif;font-size:50px;">- Operon diagr<tspan x="920.864px 950.893px " y="391.557px 391.557px ">am</tspan>s</text>
+        </g>
+        <g transform="matrix(6.03585e-17,0.985729,-0.927116,5.67695e-17,7307.72,3340.63)">
+            <path d="M2298.94,5416.48L2585.66,5989.91L2012.23,5989.91L2298.94,5416.48Z" style="stroke:black;stroke-width:74.03px;"/>
+        </g>
+        <g transform="matrix(6.03585e-17,0.985729,-0.927116,5.67695e-17,9885.31,3340.63)">
+            <path d="M2298.94,5416.48L2585.66,5989.91L2012.23,5989.91L2298.94,5416.48Z" style="stroke:black;stroke-width:74.03px;"/>
+        </g>
+        <g transform="matrix(6.03585e-17,0.985729,-0.927116,5.67695e-17,12460.2,3340.63)">
+            <path d="M2298.94,5416.48L2585.66,5989.91L2012.23,5989.91L2298.94,5416.48Z" style="stroke:black;stroke-width:74.03px;"/>
+        </g>
+        <g transform="matrix(6.03585e-17,-0.985729,0.927116,5.67695e-17,654.017,9205.64)">
+            <path d="M2298.94,5416.48L2585.66,5989.91L2012.23,5989.91L2298.94,5416.48Z" style="stroke:black;stroke-width:74.03px;"/>
+        </g>
+        <g transform="matrix(6.03585e-17,-0.985729,0.927116,5.67695e-17,-1902.15,9230.17)">
+            <path d="M2298.94,5416.48L2585.66,5989.91L2012.23,5989.91L2298.94,5416.48Z" style="stroke:black;stroke-width:74.03px;"/>
+        </g>
+        <g transform="matrix(-0.824675,-0.539975,0.507867,-0.775638,7485.71,12048.1)">
+            <path d="M2298.94,5416.48L2585.66,5989.91L2012.23,5989.91L2298.94,5416.48Z" style="stroke:black;stroke-width:74.03px;"/>
+        </g>
+        <g transform="matrix(1,0,0,1,2426.2,-126.585)">
+            <rect x="2504.21" y="5416.48" width="1834.12" height="633.735" style="fill:rgb(255,229,136);stroke:black;stroke-width:35.42px;"/>
+        </g>
+        <g transform="matrix(1,0,0,1,1245.44,1230.69)">
+            <rect x="2504.21" y="5416.48" width="1834.12" height="633.735" style="fill:rgb(186,231,207);stroke:black;stroke-width:35.42px;"/>
+        </g>
+        <g transform="matrix(1,0,0,1,5051.24,-126.585)">
+            <rect x="2504.21" y="5416.48" width="1834.12" height="633.735" style="fill:rgb(191,176,228);stroke:black;stroke-width:35.42px;"/>
+        </g>
+        <g transform="matrix(1,0,0,1,3865.18,1230.69)">
+            <rect x="2504.21" y="5416.48" width="1834.12" height="633.735" style="fill:rgb(125,176,228);stroke:black;stroke-width:35.42px;"/>
+        </g>
+        <g transform="matrix(1,0,0,1,-124.387,-126.585)">
+            <rect x="2504.21" y="5416.48" width="1834.12" height="633.735" style="fill:rgb(255,176,136);stroke:black;stroke-width:35.42px;"/>
+        </g>
+        <g transform="matrix(1.60117,0,0,1.60117,4125.79,4862.98)">
+            <text x="615.102px" y="341.557px" style="font-family:'Verdana-Bold', 'Verdana', sans-serif;font-weight:700;font-size:50px;">tBLASTn search each gene in the</text>
+            <text x="656.96px" y="391.557px" style="font-family:'Verdana-Bold', 'Verdana', sans-serif;font-weight:700;font-size:50px;">reference within the speciﬁed</text>
+            <text x="846.523px" y="441.557px" style="font-family:'Verdana-Bold', 'Verdana', sans-serif;font-weight:700;font-size:50px;">taxonomic clade</text>
+        </g>
+        <g transform="matrix(1.60117,0,0,1.60117,6751.75,4943.04)">
+            <text x="621.194px" y="341.557px" style="font-family:'Verdana-Bold', 'Verdana', sans-serif;font-weight:700;font-size:50px;">Group AnnotatedHit objects into</text>
+            <text x="579.788px" y="391.557px" style="font-family:'Verdana-Bold', 'Verdana', sans-serif;font-weight:700;font-size:50px;">GenomeFragment objects based on</text>
+            <text x="550.381px" y="441.557px" style="font-family:'Verdana-Bold', 'Verdana', sans-serif;font-weight:700;font-size:50px;">similar genome nucleotide accession.</text>
+        </g>
+        <g transform="matrix(1.60117,0,0,1.60117,5565.69,6359.23)">
+            <text x="557.79px" y="341.557px" style="font-family:'Verdana-Bold', 'Verdana', sans-serif;font-weight:700;font-size:50px;">Group GenomeFragment objects into</text>
+            <text x="618.691px" y="391.557px" style="font-family:'Verdana-Bold', 'Verdana', sans-serif;font-weight:700;font-size:50px;">Species objects based on similar</text>
+            <text x="669.912px" y="441.557px" style="font-family:'Verdana-Bold', 'Verdana', sans-serif;font-weight:700;font-size:50px;">genome assembly accession.</text>
+        </g>
+        <g transform="matrix(1.60117,0,0,1.60117,2943.94,6240.82)">
+            <text x="681.472px" y="341.557px" style="font-family:'Verdana-Bold', 'Verdana', sans-serif;font-weight:700;font-size:50px;">Process each Species object</text>
+        </g>
+        <g transform="matrix(2.22506,0,0,2.22506,902.464,4731.56)">
+            <text x="705.581px" y="341.557px" style="font-family:'Verdana-Bold', 'Verdana', sans-serif;font-weight:700;font-size:50px;">Process Reference Operon</text>
+        </g>
+        <g transform="matrix(1.57678,0,0,1.57678,4237.3,5113.12)">
+            <text x="552.871px" y="341.557px" style="font-family:'Verdana', sans-serif;font-size:50px;">- Pull all records within e-<tspan x="1199.09px 1227.7px 1257.73px " y="341.557px 341.557px 341.557px ">val</tspan>ue limit</text>
+            <text x="552.871px" y="391.557px" style="font-family:'Verdana', sans-serif;font-size:50px;">- Apply co<tspan x="806.558px 835.708px 865.493px 885.952px 915.981px " y="391.557px 391.557px 391.557px 391.557px 391.557px ">verag</tspan>e ﬁlter</text>
+            <text x="552.871px" y="441.557px" style="font-family:'Verdana', sans-serif;font-size:50px;">- R<tspan x="626.699px 656.484px " y="441.557px 441.557px ">et</tspan>urn hits as AnnotatedHit objects</text>
+            <text x="552.871px" y="491.557px" style="font-family:'Verdana', sans-serif;font-size:50px;">- Filter hits with a local R<tspan x="1182.58px 1212.37px 1241.52px 1271.3px " y="491.557px 491.557px 491.557px 491.557px ">ever</tspan>se BLA<tspan x="1462.1px 1496.28px " y="491.557px 491.557px ">ST</tspan></text>
+        </g>
+        <g transform="matrix(1.57678,0,0,1.57678,3008.8,6367.02)">
+            <text x="552.871px" y="341.557px" style="font-family:'Verdana', sans-serif;font-size:50px;">- Assemble operons for each fr<tspan x="1328.29px 1358.32px " y="341.557px 341.557px ">ag</tspan>ment in</text>
+            <text x="552.871px" y="391.557px" style="font-family:'Verdana', sans-serif;font-size:50px;">the Species.</text>
+            <text x="552.871px" y="441.557px" style="font-family:'Verdana', sans-serif;font-size:50px;">- Calculate the amino acid percent ID for</text>
+            <text x="552.871px" y="491.557px" style="font-family:'Verdana', sans-serif;font-size:50px;">each hit in the species and ﬁlter out an<tspan x="1536.64px " y="491.557px ">y</tspan></text>
+            <text x="552.871px" y="541.557px" style="font-family:'Verdana', sans-serif;font-size:50px;">hits that do not meet the minimum ID<tspan x="1515.3px " y="541.557px ">.</tspan></text>
+        </g>
+        <g transform="matrix(1.74605,0,0,1.57678,1510.88,5049.26)">
+            <text x="552.871px" y="341.557px" style="font-family:'Verdana', sans-serif;font-size:50px;">- Mak<tspan x="694.424px 724.209px " y="341.557px 341.557px ">e </tspan>a local BLA<tspan x="1016.88px 1051.06px " y="341.557px 341.557px ">ST</tspan> database of the</text>
+            <text x="552.871px" y="391.557px" style="font-family:'Verdana', sans-serif;font-size:50px;">reference genome assembly</text>
+            <text x="552.871px" y="441.557px" style="font-family:'Verdana', sans-serif;font-size:50px;">- Determine the max intergenic</text>
+            <text x="552.871px" y="491.557px" style="font-family:'Verdana', sans-serif;font-size:50px;">distance in the reference</text>
+        </g>
+    </g>
+</svg>
