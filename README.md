@@ -94,9 +94,7 @@ Parameter Definitions:
 
 Parameter | Description 
 ---|---
-
 *entrez* Parameters |
-
 `request_limit` | The max number of attempts that should be made to complete an Entrez request
 
 
