@@ -135,8 +135,8 @@ Parameter | Description
 Results are outputted to a CSV and each operon is drawn to a SVG: 
 
 ### Usage
-Once the `conda` environment is set up, the script can be ran via command line: <br>
-`python operon_conserve_detect.py [input file name].json` <br>
+Once the `conda` environment is set up, the script can be ran via command line: 
+```python operon_conserve_detect.py [input file name].json``` 
 where the input file name is the name of the input file, not including the directory. The input file is expected to be in `/input/`. 
 
 
