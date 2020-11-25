@@ -90,12 +90,26 @@ The operon_conserve_detect.py script takes a reference operon as a list of genom
 
 See the template input JSON file in /input/. 
 
-Parameter Definitions:
-
 Parameter | Description 
 ---|---
 *entrez* Parameters |
 `request_limit` | The max number of attempts that should be made to complete an Entrez request
+`sleep_time` | The amount of time that should be waited between consective attempts at an Entrez request (ms)
+`email` | Email to use for the Entrez api
+`api_key` | Entrez API key
+---|---
+*blast* Parameters|
+`tax_include` and `tax_exclude` | These will restrict the BLAST to include (`tax_include`) and exclude (`tax_exclude`) specific taxa. 
+`database` | The database to conduct the BLAST search against
+`e-val` | The maximum e-value threshold for the BLAST searches. 
+`coverage_min` | The coverage threshold to restrict the BLAST results. 
+`max_hits` | The max hits to recieve from a BLAST search. 
+`max_attempts` | The maximum number of attempts that should be made to pull all the BLAST hits within the e-value cutoff. This is only applicable is the `extensive_search` option is set to `true`.
+`search_mult_factor` | The `max_hits` is increased by this factor through each iteration if the `extensive_search` option is set to `true`. 
+`annotate` | Can be `true` or `false`. Determines if the BLAST search will return `AnnotatedHit` objects. Current functionality requires that it MUST BE `true`. 
+`extensive_search` | If `true`, multiple BLAST searches will be conducted (if neccessary) to pull all hits within the `e-value` limit. If `false`, a single BLAST search will be conducted regardless of whether all hits witin the `e-value` threshold are returned. 
+`reverse_blast` | 
+
 
 
 
