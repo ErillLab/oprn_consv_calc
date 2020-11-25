@@ -108,8 +108,26 @@ Parameter | Description
 `search_mult_factor` | The `max_hits` is increased by this factor through each iteration if the `extensive_search` option is set to `true`. 
 `annotate` | Can be `true` or `false`. Determines if the BLAST search will return `AnnotatedHit` objects. Current functionality requires that it MUST BE `true`. 
 `extensive_search` | If `true`, multiple BLAST searches will be conducted (if neccessary) to pull all hits within the `e-value` limit. If `false`, a single BLAST search will be conducted regardless of whether all hits witin the `e-value` threshold are returned. 
-`reverse_blast` | 
-
+`reverse_blast` | If `true`, all return hits will be tested for true homology by BLAST searching the reference genome with the hit. 
+---|---
+*hit\_feature\_detection* |
+`margin_limit` | The acceptable margin between the alignment positions and the positions of the annotated feature. 
+`max_attempts`| The maximum number of attempts that will be made to identify a feature for a hit.
+`mult_factor` | The factor by which the `margin_limit` will increase for every attempt at identifying the feature for a hit. 
+---|---
+*operon\_assembly* |
+`feature_limit` | Maximum number of features allowed between two hits on an operon.
+`intergenic_limit` | Maximum distance in bp allowed between two genes in an operon.
+`use_ref_limit` and `ref_limit_margin` | If `true`, the `intergenic_limit` will be determined by the max intergenic distance in the refernce operon multiplied by the margin. 
+---|---
+`thread_limit` | A multithreaded approach is implemented when processing each of the Species objects. This is the maximum number of threads.
+`species_percent_id_limit` | For a species to be outputted, it must have at least one hit with an amino acid percent identity above this limit.
+`input_records` | The protein accessions for the genes in an operon. The order the genes are representative of the order of the genes in the reference genome. 
+`reference_genome_accession`| The nucleotide accession of the nucleotide record from the reference speices. This nucleotide record contains the reference operon. 
+`reference_genome_assembly`| The genome assembly accession from which the reference operon comes from. Needed to conduct the reverse BLAST locally. 
+`reference_genome_name` | The name of the reference assembly.
+`cache_dir` | The cache directory where all nucleotide records will be downloaded locally. 
+`color_code` | A dictionary that defines the colors for each of the genes in the reference operon. These colors are used to draw the opeon diagram for the putative operons. `intergenic` refers to features that are inserted into the operon, but were not a hit to any of the reference genes. 
 
 
 
