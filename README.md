@@ -130,11 +130,29 @@ Parameter | Description
 `color_code` | A dictionary that defines the colors for each of the genes in the reference operon. These colors are used to draw the opeon diagram for the putative operons. `intergenic` refers to features that are inserted into the operon, but were not a hit to any of the reference genes. 
 
 
-
-
 ### Output
 
 Results are outputted to a CSV and each operon is drawn to a SVG: 
 
 ### Usage
+Once the `conda` environment is set up, the script can be ran via command line:
+`python operon_conserve_detect.py [input file name].json`
+where the input file name is the name of the input file, not including the directory. The input file is expected to be in `/input/`. 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
