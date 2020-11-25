@@ -88,7 +88,22 @@ The operon_conserve_detect.py script takes a reference operon as a list of genom
 
 ### Sample Input
 
+See the template input JSON file in /input/. 
+
+Parameter Definitions:
+
+Parameter | Description | Default
+---|---|---
+
+*entrez* Parameters | |
+
+
+
+
+
 ### Output
+
+Results are outputted to a CSV and each operon is drawn to a SVG: 
 
 ### Usage
 
