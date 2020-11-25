@@ -93,7 +93,7 @@ See the template input JSON file in /input/.
 Parameter Definitions:
 
 Parameter | Description 
----|---|---
+---|---
 
 *entrez* Parameters |
 
