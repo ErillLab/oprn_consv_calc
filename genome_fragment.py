@@ -155,8 +155,9 @@ class GenomeFragment:
                     if i == (self.req_limit - 1):
                             print("\t\tCould not download record after " + str(self.req_limit) + " attempts")
             
-            with open(record_file, 'w') as file:
-                file.write(record)
+            if not record == None:
+                with open(record_file, 'w') as file:
+                    file.write(record)
 
             
         with open(record_file, 'rb') as file:
