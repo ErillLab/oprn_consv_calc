@@ -192,7 +192,7 @@ def search_blast(input_records, db='ref_prok_rep_genomes', max_attempts=3, searc
         
         #Fetches the protein sequence to be used in the BLAST search
         print("\t|~> Getting protein sequence for " + str(input_record) + "...")
-        input_seq = (SeqIO.read(handle, "fasta")).format("fasta")
+        input_seq = (SeqIO.read(handle, "fasta")).seq
         
 
         #Keeps track of the current number of attempts made to complete the BLAST search
@@ -351,6 +351,7 @@ def search_blast(input_records, db='ref_prok_rep_genomes', max_attempts=3, searc
 
                     #Calculate the coverage for the current hit                  
                     cov = (hit.query_end - hit.query_start + 1) / (len(input_seq))
+                    print('\t\t\tCoverage value: ' + str(cov))
                     
                     if(cov >= min_cover):
 
@@ -364,6 +365,7 @@ def search_blast(input_records, db='ref_prok_rep_genomes', max_attempts=3, searc
                     #Prints error if the minimum coverage is not met    
                     else:
                         print("\t\t|~> Hit did not meet coverage requirement: " + str(curr_hit_rec))
+                        print('\t\t\tCoverage value: ' + str(cov))
                 else:
                     
                     #Appends the AnnotatedHit object if requested
