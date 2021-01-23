@@ -11,6 +11,8 @@
 
     "blast" : [{
 
+		"blast_type" : "local",
+		"local_db_path" : "/Volumes/Issac_Ext/SOA/gammaproteobac_nucl/gamma_database_nucl",
 		"tax_include" : ["1236"],
 		"tax_exclude" : [],
 		"database" : "ref_prok_rep_genomes",

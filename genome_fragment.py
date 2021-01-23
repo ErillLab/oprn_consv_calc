@@ -318,9 +318,6 @@ class GenomeFragment:
             temp_operon_features = []
             temp_operon_features.append(plus_strand_hits.pop(0))
 
-            #The last feature in the temp operon that was from an original query, i.e AnnotatedHit
-            last_a_hit_pos = 0
-
             #Keep track of inserted intergenic features added
             num_features_added = 0
 
@@ -344,7 +341,6 @@ class GenomeFragment:
                     if len(plus_strand_hits) > 0:
                         if next_feat == plus_strand_hits[0]:
                             temp_operon_features.append(plus_strand_hits.pop(0))
-                            last_a_hit_pos = len(temp_operon_features) - 1
                             num_features_added = 0
                             added_next_feat = True
                     
@@ -369,9 +365,6 @@ class GenomeFragment:
             temp_operon_features = []
             temp_operon_features.append(minus_strand_hits.pop(0))
 
-            #The last feature in the temp operon that was from an original query, i.e AnnotatedHit
-            last_a_hit_pos = 0
-
             #Keep track of inserted intergenic features added
             num_features_added = 0
 
@@ -395,7 +388,6 @@ class GenomeFragment:
                     if len(minus_strand_hits) > 0:
                         if next_feat == minus_strand_hits[0]:
                             temp_operon_features.append(minus_strand_hits.pop(0))
-                            last_a_hit_pos = len(temp_operon_features) - 1
                             num_features_added = 0
                             added_next_feat = True
                     
@@ -461,7 +453,7 @@ class GenomeFragment:
         position = 0
         found = False
 
-        while position < (len(self.all_features) - 1):
+        while position < (len(self.all_features)):
             if feature == self.all_features[position]:
                 found = True
                 break

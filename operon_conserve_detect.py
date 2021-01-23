@@ -6,6 +6,7 @@ Determines how conserved a specific reference operon is within a specific taxono
 '''
 
 from Bio import pairwise2, Seq, Entrez, SeqIO
+from Bio.Blast.Applications import NcbitblastnCommandline
 from Bio.SeqRecord import SeqRecord
 from Bio.SubsMat.MatrixInfo import blosum62
 from Bio.Blast import NCBIWWW, NCBIXML
@@ -44,6 +45,8 @@ EMAIL = ""
 E_API = ""
 
 #Blast parameters
+blast_type = ''
+local_db_path = ''
 tax_include = []
 tax_exclude = []
 database = 'ref_prok_rep_genomes'
@@ -192,7 +195,7 @@ def search_blast(input_records, db='ref_prok_rep_genomes', max_attempts=3, searc
         
         #Fetches the protein sequence to be used in the BLAST search
         print("\t|~> Getting protein sequence for " + str(input_record) + "...")
-        input_seq = (SeqIO.read(handle, "fasta")).seq
+        input_seq = (SeqIO.read(handle, "fasta"))
         
 
         #Keeps track of the current number of attempts made to complete the BLAST search
@@ -259,7 +262,7 @@ def search_blast(input_records, db='ref_prok_rep_genomes', max_attempts=3, searc
                 
                     try:
                     
-                        result_handle = NCBIWWW.qblast("tblastn", db ,input_seq, 
+                        result_handle = NCBIWWW.qblast("tblastn", db ,input_seq.format('fasta'), 
                                                 entrez_query=taxon, expect=e_cutoff,
                                                 hitlist_size=max_hits)
                         
@@ -285,7 +288,7 @@ def search_blast(input_records, db='ref_prok_rep_genomes', max_attempts=3, searc
                 
                     try:
                     
-                        result_handle = NCBIWWW.qblast("tblastn", db ,input_seq, 
+                        result_handle = NCBIWWW.qblast("tblastn", db ,input_seq.format('fasta'), 
                                                 expect=e_cutoff,
                                                 hitlist_size=max_hits)
                         
@@ -350,7 +353,7 @@ def search_blast(input_records, db='ref_prok_rep_genomes', max_attempts=3, searc
                 if min_cover:
 
                     #Calculate the coverage for the current hit                  
-                    cov = (hit.query_end - hit.query_start + 1) / (len(input_seq))
+                    cov = (hit.query_end - hit.query_start + 1) / (len(input_seq.seq))
                     print('\t\t\tCoverage value: ' + str(cov))
                     
                     if(cov >= min_cover):
@@ -387,6 +390,115 @@ def search_blast(input_records, db='ref_prok_rep_genomes', max_attempts=3, searc
                             print("\t\t|~> Adding hit: " + str(curr_hit_rec))
                             return_hits.append((input_record, curr_hit_rec ,record))
                 
+
+    print("\t|~> Returning " + str(len(return_hits)) + " unique hits")
+    return return_hits
+
+def local_blast_search(input_record, db_path, e_cutoff=10-10, min_cover=None):
+    '''
+    Completes a local blast search instead of conducting remotely.
+
+    Parameters
+    ----------
+    input_record: str
+        The accession for the query protein record
+    db_path: str
+        The file path to the local BLAST database
+    e_cutoff: float
+        The maximum e-value to cutoff the blast hits.
+    min_cover: float
+        The minimum coverage for each accepted hit
+    
+    Returns
+    -------
+    annotated_hits: list[AnnotateHit.object]
+        A list of AnnotatedHit.objects that hold metadata for each of the BLAST hits.
+    '''
+
+    print('Local BLAST: ' + str(input_record))
+
+    #Get the fasta record for the input record
+    fasta_record = None
+
+    for i in range(REQUEST_LIMIT):
+
+        try:
+
+            handle = Entrez.efetch(db='protein', id=input_record, retmode='fasta', rettype='xml')        
+            fasta_record = handle.read()
+            time.sleep( SLEEP_TIME)
+
+            break
+
+        except:
+
+            print("\t\tNCBI exception raised on attempt " + str(i) + "\n\t\treattempting now for ...")
+
+            if i == (REQUEST_LIMIT - 1):
+                    print("\t\tCould not download record after " + str(REQUEST_LIMIT) + " attempts")
+    
+    #Check if the fasta record was pulled successfully
+    if fasta_record == None:
+        print('\t\tFasta record could not be downloaded for ' + str(input_record))
+        return None
+    
+    #Write the FASTA record to a temporary input file for the local blast search
+    record_fasta_file = './local_blast_bin/temp_in.fasta'
+    with open(record_fasta_file, 'w') as file:
+        file.write(fasta_record)
+    
+    #Get the query length that will be used to calculate the coverage later
+    record_fasta = SeqIO.read(open(record_fasta_file,'r'),'fasta')
+    query_length = len(record_fasta.seq)
+
+
+    print('Downloaded query sequence: ' + str(input_record))
+
+    #Conduct the local BLAST search
+    blast_command = NcbitblastnCommandline(query=record_fasta_file, db=db_path, evalue=e_cutoff, outfmt=5, out="./local_blast_bin/out.xml")
+    blast_command()
+
+    #Parse the BLAST results
+    blast_records = list(NCBIXML.parse(open('./local_blast_bin/out.xml', 'r')))
+
+    print('Parsing through local BLAST results ' + str(input_record) + '...')
+
+    #List of annotated hits to return
+    return_hits = []
+
+    print("\t|~> Extracting hits from BLAST results...")
+    for record in blast_records[0].alignments:
+        current_hit_def = re.sub('[^A-Za-z0-9]+', '_', record.hit_def.split(' ')[1])
+        curr_hit_rec = record.hit_def.split(' ')[0]
+        print("\t\t|~> Analyzing hit " + str(curr_hit_rec))
+        
+        #Iterate through the hits
+        for hit in record.hsps:
+
+            #Initiates a AnnotatedHit object if set by the parameters.
+            a_hit = AnnotatedHit(query_accession=input_record, hit_accession=curr_hit_rec, genome_fragment_name=current_hit_def, align_start=hit.sbjct_start, alignment_seq=hit.sbjct, 
+                align_end=hit.sbjct_end, strand=hit.frame[1], percent_identity=(hit.identities/hit.align_length), req_limit=REQUEST_LIMIT, sleep_time=SLEEP_TIME)
+            
+            if min_cover == None:
+                continue
+
+            #Calculate the coverage for the current hit                  
+            cov = (hit.query_end - hit.query_start + 1) / (query_length)
+            print('\t\t\tCoverage value: ' + str(cov))
+            
+            if(cov >= min_cover):
+
+                #Appends the AnnotatedHit object if requested
+                if annotate:
+                    return_hits.append(a_hit)
+
+                else:
+                    return_hits.append((input_record, curr_hit_rec ,record))
+                    
+            #Prints error if the minimum coverage is not met    
+            else:
+                print("\t\t|~> Hit did not meet coverage requirement: " + str(curr_hit_rec))
+                print('\t\t\tCoverage value: ' + str(cov))
 
     print("\t|~> Returning " + str(len(return_hits)) + " unique hits")
     return return_hits
@@ -474,6 +586,12 @@ def load_input_file(filename):
     E_API = file_reader['entrez'][0]['api_key']
 
     #Blast parameters
+    global blast_type
+    blast_type = file_reader['blast'][0]['blast_type']
+
+    global local_db_path
+    local_db_path = file_reader['blast'][0]['local_db_path']
+
     global tax_include
     tax_include = file_reader['blast'][0]['tax_include']
 
@@ -938,7 +1056,7 @@ def make_reference_blastdb():
     global reference_total_protein
     global reference_blast_db
 
-    #Make the neccessary directories: the root directory in the 
+    #Make the neccessary directories
     if not os.path.exists(reverse_blast_root.format(ref_assembly_accession=reference_assembly_accession)):
         os.mkdir(reverse_blast_root.format(ref_assembly_accession=reference_assembly_accession))
 
@@ -992,7 +1110,7 @@ def make_reference_blastdb():
 
         os.system(cmd.format(input_file=input_file, output_file=output_file))
 
-def check_reverse_blast(query_accession, annoted_hit):
+def check_reverse_blast(query_accession, annotated_hit):
     '''
     Performs a local BLAST search of the hit against the query to see if the same feature is returned. 
 
@@ -1018,7 +1136,7 @@ def check_reverse_blast(query_accession, annoted_hit):
     #Clean the alignment sequence of the '-' from the gaps. This avoids a warning when running the local BLAST
     purged_alignment_seq = ''
 
-    for c in annoted_hit.alignment_seq:
+    for c in annotated_hit.alignment_seq:
         if not c == '-':
             purged_alignment_seq = purged_alignment_seq + c
 
@@ -1068,6 +1186,8 @@ def calc_operon_cons():
     global run_id
     global use_reference_threshold
     global reverse_blast
+    global blast_type
+    global local_db_path
     
     #Take note of the start time
     start_time = datetime.datetime.now()
@@ -1109,21 +1229,35 @@ def calc_operon_cons():
     final_hits = []
 
     for record in input_records:
-        record_hits = search_blast(
-            input_records=[record],
-            db=database,
-            max_attempts=max_blast_attemts,
-            search_mult_factor=blast_search_mult_factor, 
-            min_cover=coverage_min, 
-            max_hits=max_hits, 
-            tax_incl=tax_include, 
-            tax_excl=tax_exclude, 
-            e_cutoff=e_val, 
-            annotate=annotate, 
-            extensive_search=extensive_search
-        )
 
-        #Filters based off the reverse BLAST check if the user requested it
+        record_hits = []
+
+        #Conduct a remote blast, if requested
+        if blast_type == 'remote':
+
+            record_hits = search_blast(
+                input_records=[record],
+                db=database,
+                max_attempts=max_blast_attemts,
+                search_mult_factor=blast_search_mult_factor, 
+                min_cover=coverage_min, 
+                max_hits=max_hits, 
+                tax_incl=tax_include, 
+                tax_excl=tax_exclude, 
+                e_cutoff=e_val, 
+                annotate=annotate, 
+                extensive_search=extensive_search
+            )
+
+        #Conduct a local blast, if requested
+        elif blast_type == 'local':
+            record_hits = local_blast_search(input_record=record, db_path=local_db_path, e_cutoff=e_val, min_cover=coverage_min)
+        
+        else:
+            print('Invalid BLAST type...exiting.')
+            return
+
+        #Filter via reverse BLAST, if requested 
         if(reverse_blast):
             purged_record_hits = []
 
@@ -1137,6 +1271,7 @@ def calc_operon_cons():
 
         print('Running total of hits returned: ' + str(len(final_hits)))
         time.sleep(3)
+
     
     ##Group all the hits into GenomeFragments
     for hit in tqdm(final_hits, desc='Grouping Hits to Fragments'):
@@ -1301,5 +1436,5 @@ def calc_operon_cons():
     print("*"*10 + " Finished in " + str(elapsed_time) + "*"*10)
 
 
-
-calc_operon_cons()
+if __name__ == "__main__":
+    calc_operon_cons() 
