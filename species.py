@@ -317,6 +317,8 @@ class Species:
                 operon_count = operon_count + 1
 
                 #Keep track of the start/end of the track
+                if len(operon.features) == 0:
+                    continue
                 t_start = int(operon.features[0].five_end)
                 t_end = int(operon.features[0].three_end)
 

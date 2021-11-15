@@ -17,10 +17,7 @@ from tqdm import tqdm
 import datetime
 import time
 import json
-import traceback
 import csv
-import random
-import xml.dom.minidom
 import re
 import sys
 import csv
@@ -424,7 +421,7 @@ def local_blast_search(input_record, db_path, e_cutoff=10-10, min_cover=None):
 
         try:
 
-            handle = Entrez.efetch(db='protein', id=input_record, retmode='fasta', rettype='xml')        
+            handle = Entrez.efetch(db='protein', id=input_record, retmode='fasta', rettype='fasta')        
             fasta_record = handle.read()
             time.sleep( SLEEP_TIME)
 
@@ -710,7 +707,7 @@ def write_all_out(filename='output.csv'):
 
     #Write info for all the species in the file
     for sp in species:
-        sp_row = [sp.species_name, (str(sp.sim_score*100) + "%"), (str(100 * sum(sp.query_percent_ids.values())/len(sp.query_percent_ids)) + '%')]
+        sp_row = [(sp.species_name + '<' + sp.assembly_accession + '>'), (str(sp.sim_score*100) + "%"), (str(100 * sum(sp.query_percent_ids.values())/len(sp.query_percent_ids)) + '%')]
 
         #Pulls the query percent IDs
         for query in input_records:
@@ -1120,7 +1117,7 @@ def check_reverse_blast(query_accession, annotated_hit):
         The accession for the query gene that the hit resulted from.
     annotated_hit: AnnotatedHit object
         The hit that is being tested. 
-    '''
+    ''' 
 
     global reference_blast_db
     global reference_assembly_accession
@@ -1158,7 +1155,7 @@ def check_reverse_blast(query_accession, annotated_hit):
 
         if len(result_handle[0].alignments) > 0:
             record  = result_handle[0].alignments[0]
-            #tqdm.write(query_accession + '\t' + reference_genome_accession + '\t' + record.hit_def)
+            tqdm.write(query_accession + '\t' + reference_genome_accession + '\t' + record.hit_def + '\t' + annotated_hit.genome_accession)
             if (query_accession in record.hit_def) and (reference_genome_accession in record.hit_def):
                 hit_returned_query = True
                 

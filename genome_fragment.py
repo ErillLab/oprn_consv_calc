@@ -156,7 +156,7 @@ class GenomeFragment:
                             print("\t\tCould not download record after " + str(self.req_limit) + " attempts")
             
             if not record == None:
-                with open(record_file, 'w') as file:
+                with open(record_file, 'wb') as file:
                     file.write(record)
 
             
@@ -178,7 +178,8 @@ class GenomeFragment:
 
         #Fetch the feature for each hit
         for hit in self.hits:
-            hit.fetch_feature(self.full_record, margin_limit=margin_limit, max_attempts=max_attempts, mult_factor=mult_factor)    
+            hit.fetch_feature(self.full_record)
+            #hit.fetch_feature(self.full_record, margin_limit=margin_limit, max_attempts=max_attempts, mult_factor=mult_factor)    
 
     def purge_hits(self):
         '''
@@ -273,7 +274,7 @@ class GenomeFragment:
         if a_hit.genome_fragment_name == self.name:
             self.hits.append(a_hit)
 
-    def assemble_operons(self, feature_limit=3, intergenic_limit=1500):
+    def assemble_operons(self, feature_limit=3, intergenic_limit=150):
         '''
         Takes the list of hits and organizes them into putative operons by following the scheme:
             1. Separate hits that are on + and - strands. 

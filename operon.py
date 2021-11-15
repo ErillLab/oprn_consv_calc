@@ -31,8 +31,8 @@ class Operon:
         if feature in self.genome_features:
             self.features.append(feature)
             self.features = sorted(self.features, key=lambda feature: feature.five_end)
-        else:
-            raise Exception("The feature you are trying to add is not in the genome assigned for this operon.")
+        #else:
+         #   raise Exception("The feature you are trying to add is not in the genome assigned for this operon.")
     
     
     
