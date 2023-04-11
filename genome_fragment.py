@@ -3,7 +3,7 @@
 
 '''
 
-from Bio import Entrez
+from Bio import Entrez, SeqIO
 from features import GenomeFeature
 from operon import Operon
 import time
@@ -142,7 +142,7 @@ class GenomeFragment:
 
                 try:
 
-                    handle = Entrez.efetch(db="nuccore", id=self.genome_accession, strand=1, seq_start='begin', seq_stop='end', rettype='gb', retmode='xml')
+                    handle = Entrez.efetch(db="nuccore", id=self.genome_accession, strand=1, seq_start='begin', seq_stop='end', rettype='gbwithparts', retmode='xml')
                     record = handle.read()
                     time.sleep(self.sleep_time)
 
