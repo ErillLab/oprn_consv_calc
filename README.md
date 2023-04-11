@@ -100,7 +100,8 @@ Parameter | Description
 ---|---
 *blast* Parameters|
 `tax_include` and `tax_exclude` | These will restrict the BLAST to include (`tax_include`) and exclude (`tax_exclude`) specific taxa. 
-`database` | The database to conduct the BLAST search against
+`database` | The database to conduct the BLAST search against.
+`blast_type` | Can be set to `remote` or `local`. If `local` , use `local_db_path` to set the path. 
 `e-val` | The maximum e-value threshold for the BLAST searches. 
 `coverage_min` | The coverage threshold to restrict the BLAST results. 
 `max_hits` | The max hits to recieve from a BLAST search. 
