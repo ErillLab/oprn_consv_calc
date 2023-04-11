@@ -144,7 +144,6 @@ class GenomeFragment:
 
                     handle = Entrez.efetch(db="nuccore", id=self.genome_accession, strand=1, seq_start='begin', seq_stop='end', rettype='gb', retmode='xml')
                     record = handle.read()
-                    print(record)
                     time.sleep(self.sleep_time)
 
                     break
